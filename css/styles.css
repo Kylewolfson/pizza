@@ -1,3 +1,12 @@
-.displayOrder {
+.displayOrder, #showPizza {
   display: none;
+}
+
+.pizza {
+  cursor: pointer;
+  color: #0088cc;
+}
+
+.pizza:hover {
+  text-decoration: underline;
 }

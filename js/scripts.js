@@ -45,10 +45,17 @@ $(document).ready(function() {
       });
     order.costTotal += newPizza.price();
     order.pizzaStorage.push(newPizza);
-    newPizza = new Pizza(); //Done with the old one!
     order.pizzaCounter ++;
     $("#pizzaCount").text(order.pizzaCounter).toString();
     $("#costTotal").text(order.costTotal).toString();
     $(".displayOrder").show();
+    $("ul#pizzas").append("<li>Pizza # <span class='pizza'>" + order.pizzaCounter + "</span></li>");
+    $(".pizza").last().click(function() {
+      $("#showPizza").show();
+      $("#showPizza h2").text(newPizza.pizzas);
+      $(".size").text(newPizza.pizzaSize);
+      $(".toppings").text(newPizza.toppings);
     });
+    newPizza = new Pizza(); //Done with the old one!
   });
+});
