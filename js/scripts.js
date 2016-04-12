@@ -19,8 +19,8 @@ Pizza.prototype.price = function () {
   if (this.pizzaSize === "medium") {
     priceMultiplier += .5
   }
-  price += this.toppings.length;
-  if (isInArray("sprinkles", this.toppings)) {
+  price += this.toppings.length - 1;
+  if (isInArray("Sprinkles!", this.toppings)) {
     price --;
   }
   price = price * priceMultiplier;
@@ -32,6 +32,7 @@ function isInArray(value, array) {
 }
 
 var newPizza = new Pizza();
+newPizza.toppings.push("Cheese");
 
 //UI
 $(document).ready(function() {
@@ -49,13 +50,15 @@ $(document).ready(function() {
     $("#pizzaCount").text(order.pizzaCounter).toString();
     $("#costTotal").text(order.costTotal).toString();
     $(".displayOrder").show();
-    $("ul#pizzas").append("<li>Pizza # <span class='pizza'>" + order.pizzaCounter + "</span></li>");
+    $("ul#pizzas").append("<li class=" + order.pizzaCounter+ "><span class='pizza'>Pizza # " + order.pizzaCounter + "</span></li>");
     $(".pizza").last().click(function() {
+      var whichPizza = $(this).parent().attr('class');
       $("#showPizza").show();
-      $("#showPizza h2").text(newPizza.pizzas);
-      $(".size").text(newPizza.pizzaSize);
-      $(".toppings").text(newPizza.toppings);
+      $("#showPizza h2").text("Pizza #" + whichPizza);
+      $(".size").text(order.pizzaStorage[whichPizza-1].pizzaSize);
+      $(".toppings").text(order.pizzaStorage[whichPizza-1].toppings.join(", "));
     });
     newPizza = new Pizza(); //Done with the old one!
+    newPizza.toppings.push("Cheese");
   });
 });
